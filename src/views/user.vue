@@ -12,47 +12,98 @@
       <el-button type="success">成功按钮</el-button>
     </div>
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="id" label="日期" width="100"></el-table-column>
+      <el-table-column type="index" label="#" width="40"></el-table-column>
       <el-table-column prop="username" label="姓名" width="100"></el-table-column>
-      <el-table-column prop="email" label="邮箱"></el-table-column>
+      <el-table-column prop="email" label="邮箱" width="150"></el-table-column>
       <el-table-column prop="mobile" label="电话" width="100"></el-table-column>
-      <el-table-column prop="create_time" label="创建日期" width="100"></el-table-column>
-      <el-table-column prop="role_name" label="用户状态" width="100"></el-table-column>
-      <el-table-column prop="data" label="操作" width="100"></el-table-column>
+      <el-table-column label="创建日期" width="180">
+        <template slot-scope="scope">
+            {{scope.row.create_time | fmtDate}}
+        </template>
+      </el-table-column>
+      <el-table-column label="用户状态" width="80">
+        <template slot-scope="scope">
+          <el-switch
+            v-model="scope.row.mg_state"
+            active-color="#13ce66"
+            inactive-color="#ff4949">
+          </el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="180">
+        <template slot-scope="scope">
+          <el-button type="primary" icon="el-icon-edit" :plain="true" :circle="true" size="mini"></el-button>
+          <el-button type="success" icon="el-icon-check" :plain="true" :circle="true" size="mini"></el-button>
+          <el-button type="danger" icon="el-icon-delete" :plain="true" :circle="true" size="mini"></el-button>
+        </template>
+      </el-table-column>
     </el-table>
+    <div class="box">
+      <div class="block">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[2, 4, 6, 8]"
+          :page-size="pagesize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total">
+        </el-pagination>
+      </div>
+    </div>
   </el-card>
 </template>
 
 <script>
   export default{
-    data() {
+    data () {
       return {
-        tableData: []
+        tableData: [],
+        pagenum:1,
+        pagesize:2,
+        currentPage: 1,
+        total:0
       }
     },
+
     methods: {
-      async getList(x,num) {
+      handleSizeChange (pagesize) {
+        this.currentPage = 1
+        this.pagesize = pagesize
+        this.getList()
+      },
+      handleCurrentChange(pagenum) {
+        this.pagenum = pagenum
+        this.getList()
+      },
+      async getList() {
         const AUTH_TOKEN = sessionStorage.getItem('token')
-        this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-        const list = await this.$http.get('users?pagenum='+x+'&pagesize='+num)
+        this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN
+        const list = await this.$http.get(`users?pagenum=${this.pagenum}&pagesize=${this.pagesize}`)
         if(list.status === 200){
           this.tableData = list.data.data.users
+          this.total = list.data.data.total
+          // console.log(list.data.data.total)
         }
-      }
+      },
 
     },
-    mounted() {
-      this.getList(1,4)
+    mounted () {
+      this.getList()
     }
   }
 </script>
 
 <style>
+  .box{
+    width:180px;
+  }
   .box-card {
     height: 100%;
   }
 
   .searchArea {
+    width:454px;
     margin-top: 10px;
     margin-bottom: 10px;
   }

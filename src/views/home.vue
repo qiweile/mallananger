@@ -106,7 +106,7 @@ export default {
     }
   },
   methods: {
-    logup() {
+    logup () {
       sessionStorage.clear()
       this.$router.push({
         name: 'login'
@@ -118,20 +118,42 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
+  html,body{
+    padding:0;
+    margin:0;
+  }
+  .box,.el-container{
+    height:100%;
+  }
+  .el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
 
-.el-header {
-  background-color: #b3c0d1;
-  color: #333;
-  line-height: 60px;
-  text-align: center;
-}
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    height:100%;
+  }
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    height: 100%;
+  }
+  .el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+  }
 
-.el-aside {
-  color: #333;
-}
+  .el-aside {
+    color: #333;
+  }
+  .menu{
+    height:100%;
+  }
 </style>
