@@ -29,51 +29,9 @@
 
 <script>
     export default {
-      data2: [{
-          id: 1,
-          label: '一级 1',
-          children: [{
-            id: 4,
-            label: '二级 1-1',
-            children: [{
-              id: 9,
-              label: '三级 1-1-1'
-            }, {
-              id: 10,
-              label: '三级 1-1-2'
-            }]
-          }]
-        }
-      ]
+    }
 </script>
 
 <style>
-    /* html,body{
-              margin:0;
-              padding:0;
-          }
-          .el-header {
-              background-color: #B3C0D1;
-              color: #333;
-              line-height: 60px;
-          }
 
-          .el-aside {
-              color: #333;
-
-      build/webpack.base.conf.js
-      package-lock.json
-      package.json
-      src/App.vue
-      src/assets/http.js
-      src/assets/logo.png
-      src/login/login.vue
-      src/main.js
-      src/router/index.js
-      src/views/home.vue
-      src/views/login.vue
-      src/views/text.html
-      src/views/text.vue
-      src/views/user.vue
-          } */
 </style>

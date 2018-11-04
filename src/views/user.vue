@@ -11,7 +11,7 @@
       </el-input>
       <el-button type="success" @click="adduser">添加用户</el-button>
     </div>
-    <el-table :data="tableData" style="width: 100%">
+    <el-table v-loading="loading" :data="tableData" style="width: 100%">
       <el-table-column type="index" label="#" width="40"></el-table-column>
       <el-table-column prop="username" label="姓名" width="100"></el-table-column>
       <el-table-column prop="email" label="邮箱" width="150"></el-table-column>
@@ -145,7 +145,8 @@
         listuser: '',
         options: [],
         routse: -1,
-        userId: ''
+        userId: '',
+        loading: true
       }
     },
 
@@ -235,6 +236,7 @@
 
         const list = await this.$http.get(`users?pagenum=${this.pagenum}&pagesize=${this.pagesize}&query=${this.usernamelist}`)
         if(list.status === 200){
+          this.loading = false
           this.tableData = list.data.data.users
           this.total = list.data.data.total
         }
