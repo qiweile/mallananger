@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Login from '@/views/login'
 import Home from '@/views/home'
 import User from '@/views/user'
+import rolt from '@/views/rolt'
+import roltList from '@/views/roltList'
 
 Vue.use(Router)
 
@@ -22,6 +24,16 @@ export default new Router({
           name: 'users',
           path: '/users',
           component: User
+        },
+        {
+          name: 'rolt',
+          path: '/rolt',
+          component: rolt
+        },
+        {
+          name: 'right',
+          path: '/right',
+          component: roltList
         }
       ]
     }

@@ -231,8 +231,8 @@
       },
       // 查询用户
       async getList() {
-        const AUTH_TOKEN = sessionStorage.getItem('token')
-        this.$http.defaults.headers.common['Authorization'] = AUTH_TOKEN
+
+
         const list = await this.$http.get(`users?pagenum=${this.pagenum}&pagesize=${this.pagesize}&query=${this.usernamelist}`)
         if(list.status === 200){
           this.tableData = list.data.data.users

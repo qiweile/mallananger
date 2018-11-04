@@ -22,8 +22,8 @@
         <el-menu class="menu" :router="true" :unique-opened="true" default-active="1">
           <el-submenu index="1">
             <template slot="title">
-    <i class="el-icon-location"></i>
-    <span>用户管理</span>
+          <i class="el-icon-location"></i>
+          <span>用户管理</span>
 </template>
 
 <el-menu-item index="/users">
@@ -38,7 +38,7 @@
   <span>权限管理</span>
 </template>
 
-<el-menu-item index='/role'>
+<el-menu-item index='/rolt'>
 <i class="el-icon-menu"></i>
 角色列表</el-menu-item>
 <el-menu-item index="/right">
@@ -95,37 +95,42 @@
 </template>
 
 <script>
-export default {
-  beforeCreate () {
-    const token = sessionStorage.getItem('token')
-    if (!token) {
-      this.$message.warning('请先登录')
-      this.$router.push({
-        name: 'login'
-      })
-    }
-  },
-  methods: {
-    logup () {
-      sessionStorage.clear()
-      this.$router.push({
-        name: 'login'
-      })
-      this.$message.success('退出登录成功')
+  export default {
+    beforeCreate() {
+      const token = sessionStorage.getItem('token')
+      if (!token) {
+        this.$message.warning('请先登录')
+        this.$router.push({
+          name: 'login'
+        })
+      }
+    },
+    methods: {
+      logup() {
+        sessionStorage.clear()
+        this.$router.push({
+          name: 'login'
+        })
+        this.$message.success('退出登录成功')
+      }
     }
   }
-}
 </script>
 
 <style>
-  html,body{
-    padding:0;
-    margin:0;
+  html,
+  body {
+    padding: 0;
+    margin: 0;
   }
-  .box,.el-container{
-    height:100%;
+
+  .box,
+  .el-container {
+    height: 100%;
   }
-  .el-header, .el-footer {
+
+  .el-header,
+  .el-footer {
     background-color: #B3C0D1;
     color: #333;
     text-align: center;
@@ -136,14 +141,16 @@ export default {
     background-color: #E9EEF3;
     color: #333;
     text-align: center;
-    height:100%;
+    height: 100%;
   }
+
   .el-aside {
     background-color: #D3DCE6;
     color: #333;
     text-align: center;
     height: 100%;
   }
+
   .el-header {
     background-color: #B3C0D1;
     color: #333;
@@ -153,7 +160,8 @@ export default {
   .el-aside {
     color: #333;
   }
-  .menu{
-    height:100%;
+
+  .menu {
+    height: 100%;
   }
 </style>
