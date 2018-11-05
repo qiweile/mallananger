@@ -8,7 +8,7 @@ import roltList from '@/views/roltList'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       name: 'login',
@@ -39,3 +39,5 @@ export default new Router({
     }
   ]
 })
+
+export default router
