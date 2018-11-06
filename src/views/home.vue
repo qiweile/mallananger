@@ -25,7 +25,7 @@
                         <i class="el-icon-location"></i>
                         <span>{{item.authName}}</span>
                     </template>
-                    <el-menu-item v-for="(item1,index) in item.children" :key="index" :index="'/'+item.path">
+                    <el-menu-item v-for="(item1,index) in item.children" :key="index" :index="'/'+item1.path">
                         <i class="el-icon-menu"></i>
                         <span>{{item1.authName}}</span>
                     </el-menu-item>
@@ -44,15 +44,6 @@
         created(){
             this.getleftList();
         },
-        beforeCreate() {
-            const token = sessionStorage.getItem('token')
-            if (!token) {
-                this.$message.warning('请先登录')
-                this.$router.push({
-                    name: 'login'
-                })
-            }
-        },
         data(){
             return {
                 leftList: []
@@ -61,13 +52,12 @@
         methods: {
             async getleftList(){
                 const res = await this.$http.get('menus')
-                console.log(res)
                 this.leftList = res.data.data
             },
             logup() {
                 sessionStorage.clear()
                 this.$router.push({
-                name: 'login'
+                  name: 'login'
                 })
                 this.$message.success('退出登录成功')
             }
